@@ -30,9 +30,11 @@ public class ShowController extends AbstractController {
 			HttpServletResponse response) throws Exception {
 		long questionId = ServletRequestUtils.getRequiredLongParameter(request, "questionId");
 		logger.debug("questionId : {}", questionId);
+		
 		question = questionDao.findById(questionId);
 		answers = answerDao.findAllByQuestionId(questionId);
-		ModelAndView mav = jstlView("list.jsp");
+		
+		ModelAndView mav = jstlView("show.jsp");
 		mav.addObject("question", question);
 		mav.addObject("answers", answers);
 		return mav;
